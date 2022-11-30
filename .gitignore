@@ -1,2 +1,3 @@
 /pyoops_env
-/db.sqlite3
+/pyoops/db.sqlite3
+/pyoops/static

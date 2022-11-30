@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'base.css' %}">
+        <link rel="stylesheet" href="{% static 'authors.css' %}">
+    </head>
+    <body>
+        <header>{% include 'header.html' %}</header>
+        <div class = "base_wrap">
+            <div class = "left_panel"></div>
+            <div class = "central_area">{% block content %}{% endblock %}</div>
+            <div class = "right_panel"></div>
+        </div>
+        <footer>{% include 'footer.html' %}<footer>  
+    </body>
+</html>

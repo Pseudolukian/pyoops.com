@@ -28,3 +28,43 @@
     margin: 0px;
     padding: 0px;
 }
+
+.avatar {
+    width: 100%;
+}
+
+
+.author_homepage_wrapper {
+    display: grid;
+    grid-template-columns: 0.4fr 1fr;
+    gap: 20px;
+}
+
+.author_homepage_info {
+    display: flex;
+    flex-direction: column;
+}
+
+.author_speciality {
+    display: inline-flex;
+    flex-direction: row;
+    background-color: cornflowerblue;
+    border-radius: 10px;
+    padding: 0px 5px 0px 5px;
+    color: white;
+    justify-content: space-between;
+    width: 150px;
+    align-items: center;
+    font-size: 18;
+}
+
+.author_homepage_header {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.author_level_icon {
+    height: 40px;
+    width: auto;
+}

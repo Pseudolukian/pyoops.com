@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class = "author_homepage_wrapper">
+
+
+
+    {% for data in author_data %}
+    {% if data.nickname == url_nick %}
+        <div><img class = "avatar" src = "/{{ data.avatar }}"></div>
+        <div class = "author_homepage_info">
+            <div class = "author_homepage_header">
+                <h2>{{ data.nickname }}</h2>
+                <div class = "author_speciality">
+                    <img class = "author_level_icon" src = "/{{ data.level.skill_icon }}">
+                    <p>{{ data.speciality }}</p>
+                </div>
+            </div>
+            
+            <p>{{ data.headline }}</p>
+        </div>
+    {% endif %}    
+{% endfor %}
+
+
+
+</div>
+{% endblock %}

@@ -1,18 +1,17 @@
 # Pyoops.com
 
-Pyoops is blog about Python, Django, AWS, Docker and CI/CD. In one word Pyoops must become a place where people can find any information about web app deploying with Python.
+Pyoops is internet resource (portal) when everyone can find any material about Python develop. Main feature is collection of materials. Pyoops' user can make collection of materials and share to other users. Pyoops is one place where user can find answer for any question about Python and Pythons tools.
 
+Pyoops has 2 categories of users: material authors (experts) and readers. Authors can make blog posts, forum posts, courses, videos, guides. Readers can use all these materials and make collections.
 
-## Pytoops elements and structure
- - blog;
- - news;
- - authors;
- - forum;
- - wiki.
+**Pyoops has next base elements**:
+ - Blog;
+ - Forum;
+ - Guides;
+ - Courses;
+ - Community;
+ - News.
 
-SQL scheme located there: https://drawsql.app/teams/wankers/diagrams/pyoops
+All Pyoops elements has bounding by category mechanism. This is one of the central part of Pyoops. Category mechanism manage blog, forum, guides, courses, news -- all these elements. That way gives to users opportunity to fast moving throe site structure and saving needed materials.
 
-
-## What need to do
- - Find way to realize fallower mechanism;
- - Think about views counter in blog_posts
+Pyoops must be the Internet Mecca of Python knowledge. That house of global Python community.

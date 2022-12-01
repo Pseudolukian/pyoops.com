@@ -2,15 +2,13 @@ from django.db import models
 from pyoops.settings import user_uploads_avatars_dir
 
 
-
-
 class author(models.Model):
     #Main info
     nickname = models.CharField(max_length=20)
     avatar = models.ImageField(upload_to = user_uploads_avatars_dir, blank=True, null=True)
     headline = models.TextField(max_length=200, blank=True)
     speciality = models.CharField(max_length=50, blank=True)
-    #blog_posts = models.ManyToManyField(blog_post, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
     
     #Social media links
     email = models.EmailField(max_length=50, blank=True, null=True)
@@ -20,8 +18,15 @@ class author(models.Model):
     
     #Auto generation data
     registration = models.DateTimeField(auto_now_add=True)
-    
-    #forum_posts
+    #fallowers
 
     def __str__(self):
         return self.nickname
+
+class skill_level(models.Model):
+    author = models.ForeignKey('author', on_delete=models.CASCADE, blank=True, null=True)
+    skill_level = models.CharField (max_length=50, blank=True, null=True)
+    skill_icon = models.ImageField(upload_to = user_uploads_avatars_dir, blank=True, null=True)             
+
+    def __str__(self):
+        return self.skill_level

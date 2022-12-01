@@ -9,7 +9,7 @@
     <div class = "author_card">
         <div class = "author_avatar"><img class = "grid_image" src = "/{{ author.avatar }}"></div>
         <div class = "author_info">
-            <p class = "author_card_header"><b>{{ author.nickname }}</b></p>
+            <p class = "author_card_header"><b> <a href = '/authors/{{ author.nickname }}'>{{ author.nickname }}</b></a></p>
             <p class = "author_card_body">{{ author.headline }}</p></div>
     </div>
     {% endfor %}

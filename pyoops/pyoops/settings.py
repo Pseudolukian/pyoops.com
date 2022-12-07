@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs', 
     'author',
     'blog',
     'forum',
@@ -118,13 +119,12 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
+#===============STATIC section===================
 
 STATIC_URL = 'static/'
-user_uploads_avatars_dir = STATIC_URL + 'users_upload_avatars'
-user_uploads_post_files = STATIC_URL + 'users_upload_post_files'
-news_uploads_files = STATIC_URL + 'news_uploads_files'
+
+users_static_data = STATIC_URL + 'users_static_data'
+admin_static_data = STATIC_URL + 'admin_static_data'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'static'),

@@ -1,21 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
-<center><h2>Pyoops' authors</h2></center>
-
-<div class = "authors_layout">
-
+<div class = "container-fluid">
+<h1 class="text-center mb-3">Pyoops' authors</h1>   
+<div class = "row row-cols-2 row-cols-md-3 g-4">
 
     {% for author in authors %}
-    <div class = "author_card">
-        <div class = "author_avatar"><img class = "grid_image" src = "/{{ author.avatar }}"></div>
-        <div class = "author_info">
-            <p class = "author_card_header"><b> <a href = '/authors/{{ author.nickname }}'>{{ author.nickname }}</b></a></p>
-            <p class = "author_card_body">{{ author.headline }}</p></div>
+    <div class = "col">
+        <div class="card mb-3" style="max-width: 400px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="/{{ author.avatar }}" class="img-fluid card-img-left" alt="...">
+                </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                <a href = "./{{author.nickname}}">
+                <h3 class="card-title"> {{ author.nickname }}</h3>
+                </a>
+                <p class="card-text"> {{ author.headline }} </p>
+                <p class="card-text"><small class="text-muted"> {{ author.speciality }}</small></p>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
     {% endfor %}
     
-    
+
 </div>
-
-
+</div>
 {% endblock content %}

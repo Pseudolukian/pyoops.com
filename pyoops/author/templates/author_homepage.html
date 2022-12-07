@@ -1,27 +1,48 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class = "author_homepage_wrapper">
 
-
-
-    {% for data in author_data %}
-    {% if data.nickname == url_nick %}
-        <div><img class = "avatar" src = "/{{ data.avatar }}"></div>
-        <div class = "author_homepage_info">
-            <div class = "author_homepage_header">
-                <h2>{{ data.nickname }}</h2>
-                <div class = "author_speciality">
-                    <img class = "author_level_icon" src = "/{{ data.level.skill_icon }}">
-                    <p>{{ data.speciality }}</p>
-                </div>
-            </div>
-            
-            <p>{{ data.headline }}</p>
-        </div>
-    {% endif %}    
-{% endfor %}
-
-
-
+<div class="container-fluid">
+    <!-----------Headline---------------->
+	<div class="row">
+		<div class="col-md-4">
+            {% for data in author_data %}
+			<img src="/{{ data.avatar }}" />
+			<h3>{{ data.nickname }}</h3>
+		</div>
+		<div class="col-md-8">
+			<p>{{ data.headline }}</p>
+            <p>{{ data.speciality }} / {{ data.skill }} /
+                {% for k in user_class %} 
+                    {% for v in k %} 
+                        {{ v }} /
+                    {% endfor %}
+                {% endfor %}
+            </p>
+			<button type="button" class="btn btn-success">Send message</button>
+            <button type="button" class="btn btn-success">Invite</button>
+            <button type="button" class="btn btn-success">Button</button>
+            <button type="button" class="btn btn-success">+ Fallow</button>
+		</div>
+	</div>
+    
+    
+    <!-----------Bio---------------->
+	<div class="row">
+		<div class="col-md-12">
+            <h2>About me</h2>
+			<p>{{ data.bio }}</p>
+		</div>
+	</div>
+    <!-----------Blog posts---------------->
+	<div class="row">
+        <!------Post card------>
+		<div class="col-md-4">
+			<h2>Card_1</h2>
+			<p></p>
+			<p><a class="btn" href="#">View details »</a></p>
+		</div>
+	</div>
 </div>
+    {% endfor %}
+
 {% endblock %}

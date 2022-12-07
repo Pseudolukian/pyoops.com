@@ -1,3 +1,9 @@
-/pyoops_env
-/pyoops/db.sqlite3
+/pyoops/author/migrations
+/pyoops/blog/migrations
+/pyoops/forum/migrations
+/pyoops/home/migrations
+/pyoops/news/migrations
+/pyoops/pyoops/migrations
 /pyoops/static
+/pyoops/db.sqlite3
+/pyoops_env

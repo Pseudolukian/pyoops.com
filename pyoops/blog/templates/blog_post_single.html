@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!------------Body-------------->
+<div class = "single_post_wrap">
+ <h1>{{ post_data.title }}</h1>
+ <img src = "/{{ post_data.cover }}"/>
+ <p>{{ post_data.body }}</p>
+ <!-----------Info-------->
+    <div class = "post_info">
+        <div class = "author_info">
+            <div class = "author_avatar"><img src = "/{{ post_data.author.avatar }}" /></div>
+            <div class = "author_nickname"><p>{{ post_data.author.nickname }}</p></div>
+        </div>
+        <div class = "post_info_category">
+            <img src = "/{{ post_data.category.icon }}"/>
+            <p>{{ post_data.category }}</p>
+        </div>
+        <div class = "post_tags">
+            <ul>{% for tag in tags %}
+            <li>{{ tag }}</li>{% endfor %}</ul>
+        </div>
+        <div class = "post_date"><p>{{ post_data.date }}</p></div>
+    </div>    
+</div>
+
+<!-----------Comments------------>
+<div class ="post_comments">
+    {% for comment in comments %}
+    <div class = "comment">
+        <div class = "commenter_avatar">
+            <img src = "/{{ comment.author.avatar }}"/>
+            <a href = "/author/{{comment.author.nickname}}"><h3>{{ comment.author.nickname }}</h3></a>
+        </div>
+        <div class = "comment_body"><p>{{ comment.comment }}</p></div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,16 +1,19 @@
 from django.shortcuts import render
 from django.http import request
 from .models import author
+from blog.models import blog_post
 
 authors = author.objects.all()
+posts = blog_post.objects.all().exclude(body = "*")
 
 def author_list(request):
     return render(request, 'authors.html', {'authors':authors})
 
 def author_homepage(request, nick):
+    author_posts = []
     author = authors.filter(nickname = nick)
-    user_class = [[x for x in u_c.user_class.all()] 
-                for u_c in author.prefetch_related('user_class')]
-    
+    for post in posts:
+        if post.author.nickname == nick:
+            author_posts.append(post)
     return render(request,'author_homepage.html', 
-    {'author_data':author,'user_class':user_class})
+    {'author_data':author,'author_posts':author_posts})

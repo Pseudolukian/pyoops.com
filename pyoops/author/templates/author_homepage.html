@@ -1,48 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class = "single_author_data">	
+{% for data in author_data %}
+	<!------Header-------->
+    <div class = "author_section">
+        <div class = "author_avatar">
+            <img src ="/{{data.avatar}}"/>
+            <h3>{{ data.nickname }}</h3>
+            <p>{{ data.speciality }}</p>
+        </div>
+        <div class = "author_head_line">
+            <p>{{ data.headline }}</p>
+			<div class = "single_author_data_buttons">
+				<button class = "send_mesage">Send_mesage</button>
+				<button class = "invite">Invite</button>
+				<button class = "follow">+Follow</button>
+			</div>
+        </div>
+    </div>
+	<!------Bio-------->
+	<div class = "bio">
+		<h2>About</h2>
+		<p>{{ data.bio }}</p>
+	</div>
+	<!------Bio-------->
+	<div class = "blog_posts">
+		<h2>Blog posts</h2>
+		<div class = "blog_posts_list">
+			{% for post in author_posts%}
+			<div class = "blog_post">
+				<div class = "blog_post_cover"><img src = "/{{ post.cover }}"/></div>
+				<div class ="post_info">
+					<a href = "/blog/{{ post.tech_title }}"><h3>{{ post.title }}</h3></a>
+					<p>{{ post.preview }}</p>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
 
-<div class="container-fluid">
-    <!-----------Headline---------------->
-	<div class="row">
-		<div class="col-md-4">
-            {% for data in author_data %}
-			<img src="/{{ data.avatar }}" />
-			<h3>{{ data.nickname }}</h3>
-		</div>
-		<div class="col-md-8">
-			<p>{{ data.headline }}</p>
-            <p>{{ data.speciality }} / {{ data.skill }} /
-                {% for k in user_class %} 
-                    {% for v in k %} 
-                        {{ v }} /
-                    {% endfor %}
-                {% endfor %}
-            </p>
-			<button type="button" class="btn btn-success">Send message</button>
-            <button type="button" class="btn btn-success">Invite</button>
-            <button type="button" class="btn btn-success">Button</button>
-            <button type="button" class="btn btn-success">+ Fallow</button>
-		</div>
-	</div>
-    
-    
-    <!-----------Bio---------------->
-	<div class="row">
-		<div class="col-md-12">
-            <h2>About me</h2>
-			<p>{{ data.bio }}</p>
-		</div>
-	</div>
-    <!-----------Blog posts---------------->
-	<div class="row">
-        <!------Post card------>
-		<div class="col-md-4">
-			<h2>Card_1</h2>
-			<p></p>
-			<p><a class="btn" href="#">View details »</a></p>
-		</div>
-	</div>
+	
+{% endfor %}
+
 </div>
-    {% endfor %}
-
 {% endblock %}

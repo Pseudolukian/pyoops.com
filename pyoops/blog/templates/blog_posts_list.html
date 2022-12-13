@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<section class = "content_layout">
+    {% for post_data in posts %}
+        <div class = "blogpost_card">
+            <!------Cover------------>
+            <div class = "blogpost_card_cover"><img src = "/{{ post_data.cover }}"/></div>
+            <!------Title------------>
+                <a href = "/blog/{{ post_data.tech_title }}"><h3>{{ post_data.title }}</h3></a>
+             <!------Author------------>   
+            <div class = "author_info">
+                <a href = "/author/{{post_data.author.nickname}}">
+                <img src = "/{{ post_data.author.avatar }}" /></a>
+                <a href = "/author/{{post_data.author.nickname}}">
+                <p>{{ post_data.author.nickname }}</p></a>
+            </div>    
+            <!------Priview------------>    
+                <p>{{ post_data.preview }}</p>
+            <!------Info------------>     
+            <div class = "blogpost_info">
+                <!------Categoty--------> 
+                <div class = "blogpost_category">
+                    <img src = "/{{post_data.category.icon}}" />
+                    <p>{{ post_data.category }}</p>
+                </div>
+                <!----Tags------>
+                {% for title,tags in tags.items %}
+                    {% if title == post_data.title %}
+                    <ul>{% for tag in tags %}<li>{{tag}}</li>{% endfor %}</ul>
+                    {% endif %}
+                {% endfor %}
+            </div></div>
+    {% endfor %}
+</section>
+
+{% endblock %}

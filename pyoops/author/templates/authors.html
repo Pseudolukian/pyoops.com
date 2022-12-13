@@ -1,31 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-<div class = "container-fluid">
-<h1 class="text-center mb-3">Pyoops' authors</h1>   
-<div class = "row row-cols-2 row-cols-md-3 g-4">
-
+<section class = "content_layout">
     {% for author in authors %}
-    <div class = "col">
-        <div class="card mb-3" style="max-width: 400px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="/{{ author.avatar }}" class="img-fluid card-img-left" alt="...">
+        <div class = "author_card">
+            <div class = "author_card_avatar"><img src = "/{{ author.avatar }}"/ alt = "{{ author.nickname }}"></div>
+            <div class = "author_card_info">
+                <div class = "head">
+                    <a href = "/author/{{ author.nickname }}"><h3>{{ author.nickname }}</h3></a>
+                    <p class = "author_skill">
+                        <img class = "author_skill_icon" src = "/{{author.skill.skill_icon}}"> 
+                        {{author.skill}}
+                    </p>
                 </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                <a href = "./{{author.nickname}}">
-                <h3 class="card-title"> {{ author.nickname }}</h3>
-                </a>
-                <p class="card-text"> {{ author.headline }} </p>
-                <p class="card-text"><small class="text-muted"> {{ author.speciality }}</small></p>
-                </div>
-            </div>
+                <p>{{ author.headline }}</p>
             </div>
         </div>
-    </div>
     {% endfor %}
-    
-
-</div>
-</div>
+</section>
 {% endblock content %}

@@ -4,6 +4,4 @@
 /pyoops/home/migrations
 /pyoops/news/migrations
 /pyoops/pyoops/migrations
-/pyoops/static
-/pyoops/db.sqlite3
 /pyoops_env

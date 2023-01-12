@@ -88,7 +88,7 @@ body {background-color: var(--smokie);}
 
 .post_comments {display: flex; flex-direction: row; 
     flex-wrap:wrap; gap: 20px; max-width: calc(var(--cont_width) + 40px); margin: 0 auto 20px auto;}
-.post_comments .comment { display:flex; flex-direction: row; flex:1 350px; background-color: white; border-radius: 15px; 
+.post_comments .comment { display:flex; flex-direction: row; flex:1 250px; background-color: white; border-radius: 15px; 
     padding: 10px; column-gap: 20px; }
 .post_comments .comment .commenter_avatar {display: flex; flex-direction: column; align-items: center;}
 .post_comments .comment .commenter_avatar img {height: 100px; width: auto;}

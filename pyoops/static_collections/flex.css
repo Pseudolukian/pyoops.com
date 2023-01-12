@@ -1,0 +1,16 @@
+.flex {display: flex;}
+/* ========Direction===== */
+.d_row {flex-direction: row;}
+.d_col {flex-direction: column;}
+/* ========Spacing===== */
+.s_bet {justify-content: space-between;}
+.s_arou {justify-content: space-around;}
+.s_even {justify-content: space-evenly;}
+/* ========Centering===== */
+.j_cent {justify-content: center;}
+.a_cent {align-items: center;}
+/* ========Self-aliging===== */
+.sel_cent {align-self: center;}
+.sel_end {align-self: flex-end}
+/* ========Gaping===== */
+.g_a {gap: auto;}

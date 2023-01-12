@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/pyoops.com/pyoops
+ExecStart=/var/www/pyoops.com/pyoops_env/bin/gunicorn \
+-c /var/www/pyoops.com/configs/gunicorn_conf.py pyoops.wsgi
+
+[Install]
+WantedBy=multi-user.target

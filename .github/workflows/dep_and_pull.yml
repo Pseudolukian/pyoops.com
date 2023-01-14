@@ -20,16 +20,13 @@ jobs:
             mkdir ${{ env.PROJECT_DIR }}
             cd ${{ env.PROJECT_DIR }}
             git clone ${{ env.REPO_LINK }}
-            echo "REPO_DOWNLOADED=true" > /etc/profile
-            echo "SERVER_NAME='$(hostname -I | awk '{print $1}')'" > /etc/profile
+            echo "REPO_DOWNLOADED=true" >> /etc/profile
+            echo "SERVER_NAME='$(hostname -I | awk '{print $1}')'" >> /etc/profile
             source /etc/profile
-      
-      - name: "Set files and directoryes permissions"
-        run: |
-          cd ${{ env.PROJECT_DIR }}/pyoops.com/pyoops
-          chown wwwd-data:www-data db.sqlite3  
-          chown wwwd-data:www-data static_collections
-          chmod 755 db.sqlite3        
+            cd ${{ env.PROJECT_DIR }}/pyoops.com/pyoops
+            chown wwwd-data:www-data db.sqlite3  
+            chown wwwd-data:www-data static_collections
+            chmod 755 db.sqlite3        
 
   
   create_python_env:
@@ -53,11 +50,9 @@ jobs:
             virtualenv -p python3.11 pyoops_env
             source pyoops_env/bin/activate
             pip3 install -r requirements.txt
-      - name: "Set up Gunicorn"
-        run: |
-          cp configs/gunicorn.service /etc/systemd/system/gunicorn.service
-          sudo systemctl start gunicorn
-          sudo systemctl enable gunicorn      
+            cp configs/gunicorn.service /etc/systemd/system/gunicorn.service
+            sudo systemctl start gunicorn
+            sudo systemctl enable gunicorn      
 
   
   nginx_install:

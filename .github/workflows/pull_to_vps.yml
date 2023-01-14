@@ -1,0 +1,19 @@
+name: "Pull changes from repo to VPS"
+on: workflow_dispatch
+env:
+  PROJECT_DIR: /var/www/pyoops.com/
+
+jobs:
+  pull_changes_to_vps:
+    run-on: ubuntu-latest
+
+    steps:
+      - name: "Pull changes from repo to VPS"
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ${{ PROJECT_DIR }}
+            git pull

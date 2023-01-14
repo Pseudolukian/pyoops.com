@@ -15,5 +15,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ${{ PROJECT_DIR }}
+            cd ${{ env.PROJECT_DIR }}
             git pull

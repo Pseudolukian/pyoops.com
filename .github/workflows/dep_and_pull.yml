@@ -1,0 +1,25 @@
+name: Deploy and Pull workflow
+on: workflow_dispatch
+env:
+  PROJECT_DIR: /var/www/
+
+jobs:
+  upload_repo_to_vps:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout the repository"
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.repository }}
+      
+
+      - name: "Upload repo to VPS"
+        uses: nogsantos/scp-deploy@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          user: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          remote: ${{ env.PROJECT_DIR }} 
+          src: .

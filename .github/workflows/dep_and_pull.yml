@@ -1,9 +1,9 @@
-name: Deploy and Pull workflow
+name: Deploy project to VPS and pull them after deploy 
 on: workflow_dispatch
 env:
   PROJECT_DIR: /var/www/
   REPO_LINK: https://github.com/Pseudolukian/pyoops.com.git
-  REPO_NAME: $GITHUB_REPOSITORY
+  REPO_NAME: pyoops.com
 
 jobs:
   upload_repo_to_vps:
@@ -20,4 +20,58 @@ jobs:
             mkdir ${{ env.PROJECT_DIR }}
             cd ${{ env.PROJECT_DIR }}
             git clone ${{ env.REPO_LINK }}
-            echo "$GITHUB_REPOSITORY" > gi_repo.txt
+            echo "REPO_DOWNLOADED=true" > /etc/profile
+            echo "SERVER_NAME='$(hostname -I | awk '{print $1}')'" > /etc/profile
+            source /etc/profile
+      
+      - name: "Set files and directoryes permissions"
+        run: |
+          cd pyoops.com/pyoops
+          chown wwwd-data:www-data db.sqlite3  
+          chown wwwd-data:www-data static_collections
+          chmod 755 db.sqlite3        
+
+  
+  create_python_env:
+    needs: "upload_repo_to_vps"
+    runs-on: ubuntu-latest  
+
+    steps:
+      - name: "Create Python Eviroment"      
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ${{ env.PROJECT_DIR }}/pyoops.com
+            sudo add-apt-repository -y ppa:deadsnakes/ppa
+            sudo apt-get update && sudo apt-get install -y python3.11
+            sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
+            curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
+            sudo pip3 install virtualenv
+            virtualenv -p python3.11 pyoops_env
+            source pyoops_env/bin/activate
+            pip3 install -r requirements.txt
+      - name: "Set up Gunicorn"
+        run: |
+          cp configs/gunicorn.service /etc/systemd/system/gunicorn.service
+          sudo systemctl start gunicorn
+          sudo systemctl enable gunicorn      
+
+  
+  nginx_install:
+    needs: "upload_repo_to_vps"
+    runs-on: ubuntu-latest  
+
+    steps:
+      - name: "Intstall Nginx"
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo apt install -y nginx
+            sudo ln -s ${{ env.PROJECT_DIR }}/pyoops.com/configs/nginx.conf
+            sudo nginx -s restart

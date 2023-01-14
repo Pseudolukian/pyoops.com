@@ -3,6 +3,7 @@ on: workflow_dispatch
 env:
   PROJECT_DIR: /var/www/
   REPO_LINK: https://github.com/Pseudolukian/pyoops.com.git
+  REPO_NAME: $GITHUB_REPOSITORY
 
 jobs:
   upload_repo_to_vps:
@@ -17,4 +18,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             mkdir ${{ env.PROJECT_DIR }}
+            cd ${{ env.PROJECT_DIR }}
             git clone ${{ env.REPO_LINK }}
+            echo "$GITHUB_REPOSITORY" > gi_repo.txt

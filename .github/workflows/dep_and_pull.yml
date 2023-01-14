@@ -10,16 +10,14 @@ jobs:
     steps:
       - name: "Checkout the repository"
         uses: actions/checkout@v3
-        with:
-          repository: ${{ github.repository }}
-      
 
       - name: "Upload repo to VPS"
-        uses: nogsantos/scp-deploy@master
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
-          user: ${{ secrets.SSH_USER }}
+          username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          remote: ${{ env.PROJECT_DIR }} 
-          src: ${{ github.repository }}/
+          script: |
+            mkdir $ {{ env.PROJECT_DIR }}
+            git checkout .
+            git pull

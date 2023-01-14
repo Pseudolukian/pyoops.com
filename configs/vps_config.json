@@ -1,0 +1,13 @@
+{
+"Name": "testapi1",
+"CPU": 1, 
+"RAM": 1024, 
+"HDD": 10, 
+"ImageID": 2169, 
+"HDDType":"SSD", 
+"isHighPerfomance":"false", 
+"isBackupActive":"false",
+"SshKeys":[3145] 
+}
+
+                

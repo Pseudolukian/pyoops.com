@@ -1,0 +1,11 @@
+name: Testing create VPS
+on: workflow_dispatch
+
+
+jobs:
+  create_vps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout the repo"
+        uses: actions/checkout@v3
+        run: python3 ./1cloud_create_vps.py

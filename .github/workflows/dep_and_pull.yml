@@ -22,4 +22,4 @@ jobs:
           user: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           remote: ${{ env.PROJECT_DIR }} 
-          src: .
+          src: ${{ github.repository }}

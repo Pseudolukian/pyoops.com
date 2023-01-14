@@ -2,15 +2,13 @@ name: Deploy and Pull workflow
 on: workflow_dispatch
 env:
   PROJECT_DIR: /var/www/
+  REPO_LINK: https://github.com/Pseudolukian/pyoops.com.git
 
 jobs:
   upload_repo_to_vps:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout the repository"
-        uses: actions/checkout@v3
-
       - name: "Upload repo to VPS"
         uses: appleboy/ssh-action@master
         with:
@@ -19,5 +17,4 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             mkdir $ {{ env.PROJECT_DIR }}
-            git checkout .
-            git pull
+            git clone ${{ env.REPO_LINK }}

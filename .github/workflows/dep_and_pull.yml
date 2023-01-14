@@ -1,7 +1,8 @@
-name: Deploy project to VPS and pull them after deploy 
+name: Deploy project to new VPS 
 on: workflow_dispatch
 env:
   PROJECT_DIR: /var/www/
+  PROJECT_DIR_app: /var/www/pyoops.com/pyoops
   REPO_LINK: https://github.com/Pseudolukian/pyoops.com.git
   REPO_NAME: pyoops.com
 
@@ -23,10 +24,9 @@ jobs:
             echo "REPO_DOWNLOADED=true" >> /etc/profile
             echo "SERVER_NAME='$(hostname -I | awk '{print $1}')'" >> /etc/profile
             source /etc/profile
-            cd ${{ env.PROJECT_DIR }}/pyoops.com/pyoops
-            chown wwwd-data:www-data db.sqlite3  
-            chown wwwd-data:www-data static_collections
-            chmod 755 db.sqlite3        
+            chown www-data:www-data ${{ env.PROJECT_DIR_app }}/db.sqlite3  
+            chown www-data:www-data ${{ env.PROJECT_DIR_app }}/static_collections
+            chmod 755 ${{ env.PROJECT_DIR_app }}/db.sqlite3        
 
   
   create_python_env:
@@ -68,5 +68,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             sudo apt install -y nginx
-            sudo ln -s ${{ env.PROJECT_DIR }}/pyoops.com/configs/nginx.conf
-            sudo nginx -s restart
+            ln -s /var/www/pyoops.com/configs/pyoops.conf /etc/nginx/sites-enabled/pyoops
+            systemctl restart nginx

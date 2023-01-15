@@ -8,7 +8,7 @@ print(env_file)
 
 
 with open(env_file, "a") as file: 
-    file.write(f'VPS_IP={str(server_ip)}')
+    file.write("dssdfsdfs")
 
 print(1)
 print(2)

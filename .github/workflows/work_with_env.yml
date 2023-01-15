@@ -2,10 +2,9 @@ name: Work with env
 on: workflow_dispatch
 
 jobs:
-  create_vps:
+  read_env:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: |
+      - run:
           python3 ./working_with_git_env.py
-          echo ${ env.VPS_IP }

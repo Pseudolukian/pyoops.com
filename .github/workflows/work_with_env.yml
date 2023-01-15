@@ -9,7 +9,7 @@ jobs:
         uses: action/checkout@v3
       
       - name: Run Python scr
-       run:
+        run:
           python3 ./working_with_git_env.py
       
       - name: Read the value

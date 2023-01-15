@@ -1,3 +1,3 @@
 import os
-
-os.system('echo VPS=123 >> $GITHUB_ENV')
+ip = "123.323.432.12"
+os.system(f'echo VPS={ip} >> $GITHUB_ENV')

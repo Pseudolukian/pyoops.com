@@ -18,6 +18,4 @@ jobs:
         run: |
           python3 ./1cloud_create_vps.py ${{ secrets.API_KEY }}
           source /etc/profile
-      - name: "Check env"
-        run: | 
-          echo ${{ env.VPS_IP }}
+          echo "VPS_IP=${VPS_IP}" >> $GITHUB_ENV

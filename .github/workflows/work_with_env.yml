@@ -5,8 +5,8 @@ jobs:
   read_env:
     runs-on: ubuntu-latest
     steps:
-      - run:
+      - run: |
           echo "VPS=image" >> $GITHUB_ENV 
           echo "============"
-          echo $ {{ env.VPS }}
+          echo ${{env.VPS}}
           echo "============"

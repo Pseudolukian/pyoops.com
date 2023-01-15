@@ -13,12 +13,15 @@ jobs:
     steps:
       - name: "Checkout the repo"
         uses: actions/checkout@v3
-      - name: "Setup Python and run the VPS create script"
+      
+      - name: "Setup Python"
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
           cache: 'pip'
-      - run: |
+      
+      - name: "Run the VPS create script"
+         run: |
           pip install requests
           python3 ./1cloud_create_vps.py ${{ secrets.API_KEY }}
           echo "${{ env.VPS_IP }}"

@@ -3,6 +3,7 @@ import requests, json, time, os, subprocess, sys
 api_key = str(sys.argv[1])
 url = "https://api.1cloud.ru/server/"
 server_id = str()
+env_file = os.getenv('GITHUB_ENV')
 
 headers = {"Content-Type":"application/json", "Authorization": "Bearer " + api_key}
 server_config = json.load(open("./configs/vps_config.json")) 
@@ -21,12 +22,12 @@ def create_server():
         check_server_status = requests.get(url + str(server_id), headers = headers)
         check_server_status.json()
         print("Server", server_id, "creating...")
-    
     server_ip = str(check_server_status.json()["PrimaryNetworkIp"])
-    subprocess.Popen(f'echo VPS_IP={server_ip} >> $GITHUB_ENV', shell=True)
-    result = "Server" + str(server_id) + "is created successful. " + "IP:" + str(server_ip)
+    
+    with open(env_file, "a") as file:
+        file.write(f'VPS_IP={server_ip}')
+        result = "Server" + str(server_id) + "is created successful. " + "IP:" + str(server_ip)
     return result
-
 
 if __name__ == "__main__":
     print(create_server())

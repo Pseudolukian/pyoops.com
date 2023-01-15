@@ -7,6 +7,10 @@ jobs:
     steps:
       - name: "Checkout the repo"
         uses: actions/checkout@v3
+      - name: "Setup Python"
+        uses: actions/setup-python@v4
+          with:
+            python-version: '3.10'
       - name: "Run Python script create VPS"   
         run: |
           python3 ./1cloud_create_vps.py ${{ secrets.API_KEY }}

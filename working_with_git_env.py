@@ -8,7 +8,7 @@ print(env_file)
 
 
 with open(env_file, "a") as file: 
-    file.write("dssdfsdfs")
+    file.write('VPS=asd')
 
 print(1)
 print(2)

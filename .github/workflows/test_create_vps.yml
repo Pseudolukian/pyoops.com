@@ -7,15 +7,11 @@ jobs:
     steps:
       - name: "Checkout the repo"
         uses: actions/checkout@v3
-      - name: "Setup Python"
+      - name: "Setup Python and run the VPS create script"
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
           cache: 'pip'
-      - run: 
+      - run: |
           pip install requests
-      - name: "Run Python script create VPS"   
-        run: |
           python3 ./1cloud_create_vps.py ${{ secrets.API_KEY }}
-          source /etc/profile
-          echo "VPS_IP=${VPS_IP}" >> $GITHUB_ENV

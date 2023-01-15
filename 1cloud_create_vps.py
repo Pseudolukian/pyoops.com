@@ -23,7 +23,7 @@ def create_server():
         print("Server", server_id, "creating...")
     
     server_ip = str(check_server_status.json()["PrimaryNetworkIp"])
-    subprocess.Popen(f'echo "VPS_IP"={server_ip} >> /etc/profile', shell=True)
+    subprocess.Popen(f'echo "VPS_IP"={server_ip} >> $GITHUB_ENV', shell=True)
     result = "Server" + str(server_id) + "is created successful. " + "IP:" + str(server_ip)
     return result
 

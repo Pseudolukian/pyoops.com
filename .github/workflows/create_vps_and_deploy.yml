@@ -21,7 +21,7 @@ jobs:
           cache: 'pip'
       
       - name: "Run the VPS create script"
-         run: |
+        run: |
           pip install requests
           python3 ./1cloud_create_vps.py ${{ secrets.API_KEY }}
           echo "${{ env.VPS_IP }}"

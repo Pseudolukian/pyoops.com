@@ -5,7 +5,8 @@ jobs:
   read_env:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: |
-          python3 ./working_with_git_env.py
-          echo ${{ env.VPS }}
+      - run:
+          echo "VPS=image" >> $GITHUB_ENV 
+          echo "============"
+          echo $ {{ env.VPS }}
+          echo "============"

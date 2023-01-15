@@ -2,7 +2,8 @@ import os
 
 env_file = os.getenv('GITHUB_ENV')
 
-
+print(1)
+print(2)
 print(env_file)
 
 """"

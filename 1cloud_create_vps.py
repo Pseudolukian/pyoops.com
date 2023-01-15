@@ -1,6 +1,6 @@
-import requests, json, time, os, subprocess
+import requests, json, time, os, subprocess, sys
 
-api_key = "70d6859cd3b15b215bf4fd28f938484b0f60b095cda78faae3a8ea437f08ca2f"
+api_key = str(sys.argv[1])
 url = "https://api.1cloud.ru/server/"
 server_id = str()
 
@@ -24,7 +24,6 @@ def create_server():
     
     server_ip = str(check_server_status.json()["PrimaryNetworkIp"])
     subprocess.Popen(f'echo "VPS_IP"={server_ip} >> /etc/profile', shell=True)
-    subprocess.Popen('source /etc/profile', shell=True)
     result = "Server" + str(server_id) + "is created successful. " + "IP:" + str(server_ip)
     return result
 

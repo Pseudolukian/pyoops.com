@@ -1,11 +1,18 @@
 name: Testing create VPS
 on: workflow_dispatch
 
-
 jobs:
   create_vps:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout the repo"
         uses: actions/checkout@v3
-        run: python3 ./1cloud_create_vps.py
+      - name: "Run Python script create VPS"   
+        run: |
+          python3 ./1cloud_create_vps.py ${{ secrets.API_KEY }}
+          source /etc/profile
+      - name: "Check env"
+        run: | 
+          echo ${{ env.VPS_IP }}
+          echo ${{ VPS_IP }}
+          echo $VPS_IP

@@ -1,4 +1,4 @@
-name: Deploy project to new VPS 
+name: Create new VPS and deploy repo
 on: workflow_dispatch
 env:
   PROJECT_DIR: /var/www/
@@ -7,13 +7,6 @@ env:
   REPO_NAME: pyoops.com
 
 jobs:
-
-  create_vps:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Checkout the repo"
-        uses: actions/checkout@v3
-        run: python3 ./1cloud_create_vps.py
 
   upload_repo_to_vps:
     needs: "create_vps"
@@ -37,7 +30,6 @@ jobs:
             chown www-data:www-data ${{ env.PROJECT_DIR_app }}/static_collections
             chmod 755 ${{ env.PROJECT_DIR_app }}/db.sqlite3        
 
-  
   create_python_env:
     needs: "upload_repo_to_vps"
     runs-on: ubuntu-latest  
@@ -62,7 +54,6 @@ jobs:
             cp configs/gunicorn.service /etc/systemd/system/gunicorn.service
             sudo systemctl start gunicorn
             sudo systemctl enable gunicorn      
-
   
   nginx_install:
     needs: "upload_repo_to_vps"

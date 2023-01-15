@@ -14,5 +14,3 @@ jobs:
       - name: "Check env"
         run: | 
           echo ${{ env.VPS_IP }}
-          echo ${{ VPS_IP }}
-          echo $VPS_IP

@@ -24,9 +24,8 @@ def create_server():
         print("Server", server_id, "creating...")
     server_ip = str(check_server_status.json()["PrimaryNetworkIp"])
     
-    with open(env_file, "a") as file:
-        file.write(f'VPS_IP={server_ip}')
-        result = "Server" + str(server_id) + "is created successful. " + "IP:" + str(server_ip)
+    with open(env_file, "a") as file: file.write(f'VPS_IP={str(server_ip)}')
+    result = "Server" + str(server_id) + "is created successful. " + "IP:" + str(server_ip)
     return result
 
 if __name__ == "__main__":

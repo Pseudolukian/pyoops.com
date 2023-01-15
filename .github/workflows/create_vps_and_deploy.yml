@@ -24,7 +24,7 @@ jobs:
         run: |
           pip install requests
           python3 ./1cloud_create_vps.py ${{ secrets.API_KEY }}
-          echo "${{ env.VPS_IP }}"
+          echo ${{ env.VPS_IP }}
 
   upload_repo_to_vps:
     needs: "create_vps"

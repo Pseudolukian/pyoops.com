@@ -74,9 +74,9 @@ jobs:
 
     steps:
       - name: Download VPS IP artifact and check it
-          uses: actions/download-artifact@v3
-          with:
-            name: VPS IP
+        uses: actions/download-artifact@v3
+        with:
+          name: VPS IP
         - shell: bash
           run: |
             echo "VPS_IP=$(tail -1 ${{ env.vps_ip_file }})" >> $GITHUB_ENV

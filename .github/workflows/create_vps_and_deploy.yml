@@ -49,7 +49,10 @@ jobs:
       - shell: bash
         run: |
           echo "$(tail -1 ${{ env.vps_ip_file }})"
-          echo VPS_IP=$(tail -1 ${{ env.vps_ip_file }}) >> $GITHUB_ENV
+          echo "VPS_IP=$(tail -1 ${{ env.vps_ip_file }})" >> $GITHUB_ENV
+          echo "============="
+          echo $VPS_IP
+          echo "============="
 
       - name: "Upload repo to VPS"
         uses: appleboy/ssh-action@master

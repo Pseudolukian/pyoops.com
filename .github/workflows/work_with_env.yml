@@ -12,6 +12,10 @@ jobs:
         run:
           python3 ./working_with_git_env.py
 
+      - name: Read the value
+        run:
+          echo "${{ env.VPS }}"    
+
   read_env:
     needs: "create_env"
     runs-on: ubuntu-latest

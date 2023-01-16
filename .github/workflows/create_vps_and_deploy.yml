@@ -5,6 +5,7 @@ env:
   PROJECT_DIR_app: /var/www/pyoops.com/pyoops
   REPO_LINK: https://github.com/Pseudolukian/pyoops.com.git
   REPO_NAME: pyoops.com
+  vps_ip_file: VPS_IP.txt
 
 jobs:
 
@@ -24,12 +25,32 @@ jobs:
         run: |
           pip install requests
           python3 ./1cloud_create_vps.py ${{ secrets.API_KEY }}
-          echo ${{ env.VPS_IP }}
+      
+      - name: Export VPS IP to file and check
+        run: |
+          echo "VPS=${{ env.VPS }}" > ${{ env.vps_ip_file }}
+          echo $(tail -1 ${{ env.vps_ip_file }})
+
+      - name: Save VPS IP
+        uses: actions/upload-artifact@v3
+        with:
+          name: VPS IP
+          path: ${{ env.vps_ip_file }}
 
   upload_repo_to_vps:
     needs: "create_vps"
     runs-on: ubuntu-latest
     steps:
+
+      - name: Download VPS IP artifact and check it
+        uses: actions/download-artifact@v3
+        with:
+          name: VPS IP
+      - shell: bash
+        run: |
+          echo "$(tail -1 ${{ env.vps_ip_file }})"
+          echo "VPS_IP=$(tail -1 ${{ env.vps_ip_file }})" >> $GITHUB_ENV
+
       - name: "Upload repo to VPS"
         uses: appleboy/ssh-action@master
         with:

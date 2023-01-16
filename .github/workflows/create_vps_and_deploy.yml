@@ -41,7 +41,6 @@ jobs:
     needs: "create_vps"
     runs-on: ubuntu-latest
     steps:
-
       - name: Download VPS IP artifact and check it
         uses: actions/download-artifact@v3
         with:
@@ -74,6 +73,16 @@ jobs:
     runs-on: ubuntu-latest  
 
     steps:
+      - name: Download VPS IP artifact and check it
+          uses: actions/download-artifact@v3
+          with:
+            name: VPS IP
+        - shell: bash
+          run: |
+            echo "VPS_IP=$(tail -1 ${{ env.vps_ip_file }})" >> $GITHUB_ENV
+        - run: |
+            echo ${{ env.VPS_IP }}
+      
       - name: "Create Python Eviroment"      
         uses: appleboy/ssh-action@master
         with:
@@ -99,6 +108,16 @@ jobs:
     runs-on: ubuntu-latest  
 
     steps:
+      - name: Download VPS IP artifact and check it
+        uses: actions/download-artifact@v3
+        with:
+          name: VPS IP
+      - shell: bash
+        run: |
+          echo "VPS_IP=$(tail -1 ${{ env.vps_ip_file }})" >> $GITHUB_ENV
+      - run: |
+          echo ${{ env.VPS_IP }}
+      
       - name: "Intstall Nginx"
         uses: appleboy/ssh-action@master
         with:

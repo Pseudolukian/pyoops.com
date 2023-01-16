@@ -12,14 +12,29 @@ jobs:
         run:
           python3 ./working_with_git_env.py
 
-      - name: Read the value
-        run:
-          echo "${{ env.VPS }}"    
+      - name: Save VPS IP to file and check
+        run: |
+          echo ${{ env.VPS }} > VPS_IP.txt
+          echo $(tail -1 VPS_IP.txt)
+
+      - name: Save VPS IP to repo
+        uses: actions/upload-artifact@v3
+        with:
+          name: VPS IP
+          path: VPS_IP.txt
 
   read_env:
     needs: "create_env"
     runs-on: ubuntu-latest
     steps:
       - name: Read the value
-        run:
-          echo "${{ env.VPS }}"
+        uses: actions/download-artifact@v3
+        with:
+         name: VPS IP
+      - shell: bash
+        run: |
+          echo $(tail -1 VPS_IPs.txt) >> /etc/profile
+          source /etc/profile
+
+      -run:
+        echo ${{ env.VPS }}    

@@ -90,6 +90,9 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            sudo rm /var/lib/dpkg/lock
+            sudo rm /var/lib/apt/lists/lock
+            sudo rm /var/cache/apt/archives/lock
             cd ${{ env.PROJECT_DIR }}/pyoops.com
             sudo add-apt-repository -y ppa:deadsnakes/ppa
             sudo apt-get update && sudo apt-get install -y python3.11

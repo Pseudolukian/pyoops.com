@@ -10,7 +10,6 @@ env:
 jobs:
 
   upload_repo_to_vps:
-    needs: "create_vps"
     runs-on: ubuntu-latest
     steps:
 

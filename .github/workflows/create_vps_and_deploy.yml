@@ -28,7 +28,7 @@ jobs:
       
       - name: Export VPS IP to file and check
         run: |
-          echo "VPS=${{ env.VPS }}" > ${{ env.vps_ip_file }}
+          echo "${{ env.VPS }}" > ${{ env.vps_ip_file }}
           echo $(tail -1 ${{ env.vps_ip_file }})
 
       - name: Save VPS IP

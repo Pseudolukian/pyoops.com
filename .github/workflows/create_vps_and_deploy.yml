@@ -77,11 +77,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: VPS IP
-        - shell: bash
-          run: |
-            echo "VPS_IP=$(tail -1 ${{ env.vps_ip_file }})" >> $GITHUB_ENV
-        - run: |
-            echo ${{ env.VPS_IP }}
+      - shell: bash
+        run: |
+          echo "VPS_IP=$(tail -1 ${{ env.vps_ip_file }})" >> $GITHUB_ENV
+      - run: |
+          echo ${{ env.VPS_IP }}
       
       - name: "Create Python Eviroment"      
         uses: appleboy/ssh-action@master

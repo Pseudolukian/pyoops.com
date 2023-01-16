@@ -13,6 +13,7 @@ jobs:
           python3 ./working_with_git_env.py
 
   read_env:
+    needs: "create_env"
     runs-on: ubuntu-latest
     steps:
       - name: Read the value

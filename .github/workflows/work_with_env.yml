@@ -1,5 +1,8 @@
 name: Work with env
 on: workflow_dispatch
+defaults:
+  env:
+    vps_ip_file: VPS_IP.txt
 
 jobs:
   create_env:
@@ -14,14 +17,14 @@ jobs:
 
       - name: Save VPS IP to file and check
         run: |
-          echo ${{ env.VPS }} > VPS_IP.txt
-          echo $(tail -1 VPS_IP.txt)
+          echo "VPS=${{ env.VPS }}" > ${{ env.vps_ip_file }}
+          echo $(tail -1 ${{ env.vps_ip_file }})
 
-      - name: Save VPS IP to repo
+      - name: Save VPS IP
         uses: actions/upload-artifact@v3
         with:
           name: VPS IP
-          path: VPS_IP.txt
+          path: ${{ env.vps_ip_file }}
 
   read_env:
     needs: "create_env"
@@ -30,10 +33,10 @@ jobs:
       - name: Read the value
         uses: actions/download-artifact@v3
         with:
-         name: VPS IP
+          name: VPS IP
       - shell: bash
         run: |
-          echo $(tail -1 VPS_IPs.txt) >> /etc/profile
+          echo $(tail -1 ${{ env.vps_ip_file }}) >> /etc/profile
           source /etc/profile
       - run:
           echo ${{ env.VPS }}    

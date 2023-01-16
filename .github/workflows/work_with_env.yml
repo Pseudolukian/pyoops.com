@@ -2,7 +2,7 @@ name: Work with env
 on: workflow_dispatch
 
 jobs:
-  read_env:
+  create_env:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -11,7 +11,10 @@ jobs:
       - name: Run Python scr
         run:
           python3 ./working_with_git_env.py
-      
+
+  read_env:
+    runs-on: ubuntu-latest
+    steps:
       - name: Read the value
         run:
           echo "${{ env.VPS }}"

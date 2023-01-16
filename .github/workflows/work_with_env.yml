@@ -35,6 +35,5 @@ jobs:
         run: |
           echo $(tail -1 VPS_IPs.txt) >> /etc/profile
           source /etc/profile
-
-      -run:
-        echo ${{ env.VPS }}    
+      - run:
+          echo ${{ env.VPS }}    

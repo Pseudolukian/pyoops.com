@@ -47,9 +47,9 @@ jobs:
         with:
           name: VPS IP
       - shell: bash
-        run:
+        run: |
           echo "VPS_IP=$(tail -1 ${{ env.vps_ip_file }})" >> $GITHUB_ENV
-      - run:
+      - run: |
           echo ${{ env.VPS_IP }}
 
       - name: "Upload repo to VPS"

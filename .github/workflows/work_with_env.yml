@@ -1,8 +1,8 @@
 name: Work with env
 on: workflow_dispatch
-defaults:
-  env:
-    vps_ip_file: VPS_IP.txt
+
+env:
+  vps_ip_file: VPS_IP.txt
 
 jobs:
   create_env:

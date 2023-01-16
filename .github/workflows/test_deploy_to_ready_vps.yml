@@ -9,34 +9,6 @@ env:
 
 jobs:
 
-  create_vps:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Checkout the repo"
-        uses: actions/checkout@v3
-      
-      - name: "Setup Python"
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-          cache: 'pip'
-      
-      - name: "Run the VPS create script"
-        run: |
-          pip install requests
-          python3 ./1cloud_create_vps.py ${{ secrets.API_KEY }}
-      
-      - name: Export VPS IP to file and check
-        run: |
-          echo "VPS=${{ env.VPS }}" > ${{ env.vps_ip_file }}
-          echo $(tail -1 ${{ env.vps_ip_file }})
-
-      - name: Save VPS IP
-        uses: actions/upload-artifact@v3
-        with:
-          name: VPS IP
-          path: ${{ env.vps_ip_file }}
-
   upload_repo_to_vps:
     needs: "create_vps"
     runs-on: ubuntu-latest

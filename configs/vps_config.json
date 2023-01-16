@@ -1,13 +1,14 @@
 {
-"Name": "testapi1",
-"CPU": 1, 
-"RAM": 1024, 
-"HDD": 10, 
+"Name": "Test_VPS_to_dep",
+"DCLocation": "DsMsk",
+"CPU": 2,
+"RAM": 4096, 
+"HDD": 20, 
 "ImageID": 2169, 
 "HDDType":"SSD", 
-"isHighPerfomance":"false", 
-"isBackupActive":"false",
-"SshKeys":[3145] 
+"isHighPerfomance":false, 
+"isBackupActive":false,
+"SshKeys":[3145]
 }
 
                 

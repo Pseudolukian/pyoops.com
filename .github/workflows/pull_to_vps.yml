@@ -11,7 +11,10 @@ jobs:
       - name: Download VPS IP artifact and check it
         uses: actions/download-artifact@v3
         with:
+          workflow: create_vps_and_deploy.yml
+          workflow_conclusion: success
           name: VPS IP
+          
       - shell: bash
         run: |
           echo "VPS_IP=$(tail -1 ${{ env.vps_ip_file }})" >> $GITHUB_ENV

@@ -8,10 +8,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Download VPS IP artifact and check it
+        uses: actions/download-artifact@v3
+        with:
+          name: VPS IP
+      - shell: bash
+        run: |
+          echo "VPS_IP=$(tail -1 ${{ env.vps_ip_file }})" >> $GITHUB_ENV
+      - run: |
+          echo ${{ env.VPS_IP }}
+
+
       - name: "Pull changes from repo to VPS"
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SSH_HOST }}
+          host: ${{ env.VPS_IP }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
